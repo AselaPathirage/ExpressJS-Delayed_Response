@@ -24,7 +24,7 @@ app.get('/delayed-response', (req, res) => {
   const delayInSeconds = parseInt(req.query.delay, 10); // Get the delay time from query params
 
   if (isNaN(delayInSeconds) || delayInSeconds < 0) {
-    return res.status(400).send('Invalid delay value. Please provide a positive number in seconds.');
+    return res.status(400).json({ message: "Invalid delay value. Please provide a positive number in seconds." });
   }
 
   const delayInMilliseconds = delayInSeconds * 1000; // Convert seconds to milliseconds
@@ -33,7 +33,7 @@ app.get('/delayed-response', (req, res) => {
 
   // Delay the response by the specified time
   setTimeout(() => {
-    res.send(`Response after ${delayInSeconds} seconds`);
+    res.json({ message: `Response after ${delayInSeconds} seconds` });
   }, delayInMilliseconds);
 });
 
